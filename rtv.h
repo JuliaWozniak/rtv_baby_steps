@@ -8,23 +8,12 @@
 #include <unistd.h>
 #include "ft_color.h"
 #include "ft_vector.h"
+#include "ray.h"
 
 #ifndef M_PI
     #define M_PI 3.14159265358979
 #endif
+# define K_RAY_MIN 0.00001f
 
-typedef struct s_color
-{
-	float r;
-	float g;
-	float b;
-}				t_color;
-
-typedef struct s_vector
-{
-	float x;
-	float y;
-	float z;
-}				t_vector;
 
 #endif 

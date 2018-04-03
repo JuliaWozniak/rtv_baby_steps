@@ -5,7 +5,9 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRC_D = ./src/
 SRC = 	main.c \
-		color.c
+		color.c \
+		vector.c \
+		ray.c
 		
 		
 SRCS = $(addprefix $(SRC_D),$(SRC))
