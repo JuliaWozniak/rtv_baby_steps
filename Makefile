@@ -7,7 +7,14 @@ SRC_D = ./src/
 SRC = 	main.c \
 		color.c \
 		vector.c \
-		ray.c
+		ray.c \
+		intersection.c \
+		shape.c \
+		init.c\
+		image.c \
+		inter_shapes.c \
+		shape_set.c \
+		plane.c 
 		
 		
 SRCS = $(addprefix $(SRC_D),$(SRC))
