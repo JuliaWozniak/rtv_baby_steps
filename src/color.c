@@ -80,3 +80,20 @@ t_color div_col_f(t_color c, float factor)
 	return (res);
 }
 
+
+
+
+int make_int_color(t_color c)
+{
+	float color;
+	int col;
+
+	color = c.r * 255;
+	color = color * 255;
+	color += c.g * 255;
+	color = color * 255;
+	color += c.b * 255;
+	color += 0.5;
+	col = (int)color;
+	return (col);
+}

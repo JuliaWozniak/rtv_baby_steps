@@ -15,7 +15,7 @@ t_ray assign_ray(t_ray old)
 	t_ray new;
 
 	new.origin = assign_vec(old.origin);
-	new.max_dist = K_RAY_MAX;
+	new.max_dist = old.max_dist;
 	new.dir = assign_vec(old.dir);
 	return (new);
 }

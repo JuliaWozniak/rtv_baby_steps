@@ -5,6 +5,27 @@ void print_vector(t_vector v)
 	printf("%f %f %f\n", v.x, v.y, v.z);
 }
 
+void print_ray(t_ray r)
+{
+	printf("new ray\n");
+	//print_vector(r.origin);
+	print_vector(r.dir);
+	//printf("%f\n", r.max_dist);
+}
+
+
+
+
+void print_intersection(t_intersect i)
+{
+	print_ray(i.ray);
+	//printf("%f\n", i.t);
+	// if (i.shape)
+	// 	printf("shpe type %i\n", i.shape->type);
+	// print_vector(i.normal);
+}
+
+
 t_ray make_camera_ray(float fov,
 						t_point origin,
 						t_vector target,
@@ -31,34 +52,80 @@ t_ray make_camera_ray(float fov,
 	temp1 = mult_vec_f(up, (y_screen_pos - 0.5) * tan_fov);
 	ray.dir = add_vec(temp2, temp1);
 	ray.dir = vec_norm(ray.dir);
-	print_vector(ray.dir);
+	ray.max_dist = K_RAY_MAX;
+	//print_vector(ray.dir);
 	return (ray);
 }
 
 
 
+t_shape *add_shape(t_shape *list, t_shape *new)
+{
+	t_shape *cur;
 
 
+	
 
+	if (list == NULL)
+	{
+		list = new;
+		return (list);
+	}
+	cur = list;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = new;
+	return (list);
+}
+
+t_shape *make_shape()
+{
+	t_shape *shape;
+	void *some_data;
+
+	// if shape == plane
+	shape = (t_shape *)ft_memalloc(sizeof(t_shape));
+	some_data = new_plane( (t_point) {0, -2, 0},
+			(t_vector) {0, 1, 0},
+			(t_color) {1, 0.5, 0.8}
+		);
+	shape->data = some_data;
+	shape->next = NULL;
+	shape->type = PLANE;
+	shape->intersect = &inter_plane;
+
+	return (shape);
+}
+
+t_shape *make_shape_set()
+{
+	t_shape *shape_set;
+	t_shape *shape;
+
+	shape_set = NULL;
+	shape = make_shape();
+	
+	shape_set = add_shape(shape_set, shape);
+
+	return (shape_set);
+}
 
 
 int main(void)
 {
 	t_glob *g;
 	t_shape *shape_set;
-	t_plane plane;
-	t_plane test;
+	
+	
 	int y;
 	int x;
 	t_ray ray;
+	t_intersect *i;
 
 	g = init_glob();
-	plane = new_plane( (t_point) {0, -2, 0},
-			(t_vector) {0, 1, 0},
-			(t_color) {1, 0.5, 0.8}
-		);
-	shape_set = new_shape(PLANE, (void *)&plane);
+	shape_set = NULL;
 
+	shape_set = make_shape_set();
 	// here you have initialized shape set
 
 	y = 0;
@@ -68,7 +135,6 @@ int main(void)
 
 		yu = 1.0 - ((float)y / (float)(HEIGHT - 1));
 		x = 0;
-	
 		while (x < WIDTH)
 		{
 			float xu;
@@ -79,15 +145,28 @@ int main(void)
 				(t_point) {0, 0, 1},
 				(t_point) {0, 1, 0},
 				xu, yu);
+			i = inter_ray(ray);
+				int intersected;
+				t_color pixel_color;
+				intersected = does_intersect(i, shape_set);
+				if (intersected)
+				{
+					pixel_color = i->color;
+					int i;
+					i = make_int_color(pixel_color);
+					set_pixel(g->img, x, y, i);
+				}
+				
+				
 			x++;
-		//	printf("%f %f %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
+			
+				
+
 		}
 		y++;
 	}
+	mlx_put_image_to_window(g->m_p, g->w_p, g->img->image, 0, 0);
+	mlx_loop(g->m_p);
 
-
-	test = *(t_plane *)(shape_set->data);
-	//printf("%f\n", test.position.y);
-	printf("here\n");
 	return 0;
 }

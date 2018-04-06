@@ -12,15 +12,16 @@ t_intersect default_intersection(void)
 	return (new);
 }
 
-t_intersect inter_ray(t_ray ray)
+t_intersect *inter_ray(t_ray ray)
 {
-	t_intersect new;
+	t_intersect *new;
 
-	new.ray = ray;
-	new.t = ray.max_dist;
-	new.shape = NULL;
-	new.color = init_color(0, 0, 0);
-	new.normal = init_vec(0, 0, 0);
+	new = (t_intersect *)ft_memalloc(sizeof(t_intersect));
+	new->ray = ray;
+	new->t = ray.max_dist;
+	new->shape = NULL;
+	new->color = init_color(0, 0, 0);
+	new->normal = init_vec(0, 0, 0);
 	return (new);
 }
 

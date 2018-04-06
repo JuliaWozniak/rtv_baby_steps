@@ -16,8 +16,9 @@
     #define M_PI 3.14159265358979
 #endif
 # define K_RAY_MIN 0.00001f
-# define WIDTH 5
-# define HEIGHT 5
+# define K_RAY_MAX 1.0e30f
+# define WIDTH 500
+# define HEIGHT 500
 
 # define PLANE 1 
 
@@ -37,7 +38,7 @@ typedef struct s_shape
 	void *data;
 	t_shape *next;
 	int type;
-	int (*intersect)(t_intersect, void *);
+	int (*intersect)(t_intersect *, void *, t_shape *);
 }				t_shape;
 
 typedef struct	s_img
@@ -47,8 +48,6 @@ typedef struct	s_img
 	int		bpp;
 	int		strd;
 	int		endn;
-	int		width;
-	int		height;
 }				t_img;
 
 typedef struct s_plane
@@ -71,10 +70,11 @@ void	set_pixel(t_img *img, int x, int y, int color);
 void	clear_image(t_glob *g);
 t_img	*create_image(void *mlx);
 t_glob	*init_glob(void);
-int inter_plane(t_intersect *inter, void *data);
-int does_intersect(t_intersect i, t_shape *shape);
-t_plane new_plane(t_point position, t_vector normal, t_color color);
-t_shape *new_shape(int type, void *data);
-
+int inter_plane(t_intersect *inter, void *data, t_shape *shape);
+int does_intersect(t_intersect *i, t_shape *shape);
+void * new_plane(t_point position, t_vector normal, t_color color);
+t_intersect *inter_ray(t_ray ray);
+t_intersect default_intersection(void);
+int make_int_color(t_color c);
 
 #endif 
