@@ -17,8 +17,8 @@
 #endif
 # define K_RAY_MIN 0.00001f
 # define K_RAY_MAX 1.0e30f
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 600
+# define HEIGHT 600
 
 # define PLANE 1 
 
@@ -57,12 +57,22 @@ typedef struct s_plane
 	t_color color;
 }				t_plane;
 
+typedef struct s_coord
+{
+	int x;
+	int y;
+	float xu;
+	float yu;
+}				t_coord;
+
 typedef struct s_glob
 {
 	void *m_p;
 	void *w_p;
 	t_img	*img;
 	t_shape *shape_set;
+	float fov;
+	t_coord c;
 }				t_glob;
 
 
@@ -75,6 +85,9 @@ int does_intersect(t_intersect *i, t_shape *shape);
 void * new_plane(t_point position, t_vector normal, t_color color);
 t_intersect *inter_ray(t_ray ray);
 t_intersect default_intersection(void);
-int make_int_color(t_color c);
+int make_int_clr(t_color c);
+void print_vector(t_vector v);
+void print_ray(t_ray r);
+void print_intersection(t_intersect i);
 
 #endif 

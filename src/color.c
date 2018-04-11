@@ -1,6 +1,6 @@
 #include "../rtv.h"
 
-t_color init_color(float r, float g, float b)
+t_color init_clr(float r, float g, float b)
 {
 	t_color color;
 
@@ -10,17 +10,7 @@ t_color init_color(float r, float g, float b)
 	return (color);
 }
 
-t_color assign_color(t_color old)
-{
-	t_color new;
-
-	new.r = old.r;
-	new.g = old.g;
-	new.b = old.b;
-	return (new);
-}
-
-t_color add_colors(t_color a, t_color b)
+t_color add_clr(t_color a, t_color b)
 {
 	t_color res;
 
@@ -30,7 +20,7 @@ t_color add_colors(t_color a, t_color b)
 	return (res);
 }
 
-t_color subtract_color(t_color a, t_color b)
+t_color sub_clr(t_color a, t_color b)
 {
 	t_color res;
 
@@ -40,7 +30,7 @@ t_color subtract_color(t_color a, t_color b)
 	return (res);
 }
 
-t_color mult_colors(t_color a, t_color b)
+t_color mult_clr(t_color a, t_color b)
 {
 	t_color res;
 
@@ -50,7 +40,7 @@ t_color mult_colors(t_color a, t_color b)
 	return (res);
 }
 
-t_color mult_col_f(t_color c, float factor)
+t_color mult_clr_f(t_color c, float factor)
 {
 	t_color res;
 
@@ -60,7 +50,7 @@ t_color mult_col_f(t_color c, float factor)
 	return (res);
 }
 
-t_color div_colors(t_color a, t_color b)
+t_color div_clr(t_color a, t_color b)
 {
 	t_color res;
 
@@ -70,7 +60,7 @@ t_color div_colors(t_color a, t_color b)
 	return (res);
 }
 
-t_color div_col_f(t_color c, float factor)
+t_color div_clr_f(t_color c, float factor)
 {
 	t_color res;
 
@@ -83,7 +73,7 @@ t_color div_col_f(t_color c, float factor)
 
 
 
-int make_int_color(t_color c)
+int make_int_clr(t_color c)
 {
 	float color;
 	int col;

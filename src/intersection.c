@@ -7,7 +7,7 @@ t_intersect default_intersection(void)
 	new.ray = default_ray();
 	new.t = K_RAY_MAX;
 	new.shape = NULL;
-	new.color = init_color(0, 0, 0);
+	new.color = init_clr(0, 0, 0);
 	new.normal = init_vec(0, 0, 0);
 	return (new);
 }
@@ -20,7 +20,7 @@ t_intersect *inter_ray(t_ray ray)
 	new->ray = ray;
 	new->t = ray.max_dist;
 	new->shape = NULL;
-	new->color = init_color(0, 0, 0);
+	new->color = init_clr(0, 0, 0);
 	new->normal = init_vec(0, 0, 0);
 	return (new);
 }
@@ -36,11 +36,11 @@ t_intersect assign_intersection(t_intersect i)
 {
 	t_intersect new;
 
-	new.ray = assign_ray(i.ray);
+	new.ray = i.ray;
 	new.t = i.t;
 	new.shape = i.shape;
-	new.color = assign_color(i.color);
-	new.normal = assign_vec(i.normal);
+	new.color = i.color;
+	new.normal = i.normal;
 	return (new);
 }
 

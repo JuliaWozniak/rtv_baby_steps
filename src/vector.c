@@ -20,16 +20,6 @@ t_vector init_vec_f(float f)
 	return (new);
 }
 
-t_vector assign_vec(t_vector old)
-{
-	t_vector new;
-
-	new.x = old.x;
-	new.y = old.y;
-	new.z = old.z;
-	return (new);
-}
-
 t_vector add_vec(t_vector a, t_vector b)
 {
 	t_vector res;

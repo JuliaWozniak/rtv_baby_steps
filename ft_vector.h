@@ -11,7 +11,6 @@ typedef struct s_vector
 typedef t_vector t_point;
 
 t_vector init_vec(float x, float y, float z);
-t_vector assign_vec(t_vector old);
 t_vector add_vec(t_vector a, t_vector b);
 t_vector subtract_vec(t_vector a, t_vector b);
 t_vector mult_vec(t_vector a, t_vector b);

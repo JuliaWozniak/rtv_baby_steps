@@ -14,9 +14,9 @@ t_ray assign_ray(t_ray old)
 {
 	t_ray new;
 
-	new.origin = assign_vec(old.origin);
+	new.origin = old.origin;
 	new.max_dist = old.max_dist;
-	new.dir = assign_vec(old.dir);
+	new.dir = old.dir;
 	return (new);
 }
 
@@ -24,8 +24,8 @@ t_ray init_ray(t_point p, t_vector d)
 {
 	t_ray new;
 
-	new.origin = assign_vec(p);
-	new.dir = assign_vec(d);
+	new.origin = p;
+	new.dir = d;
 	new.max_dist = K_RAY_MAX;
 	return (new);
 }

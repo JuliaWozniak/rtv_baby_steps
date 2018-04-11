@@ -14,7 +14,8 @@ SRC = 	main.c \
 		image.c \
 		inter_shapes.c \
 		shape_set.c \
-		plane.c 
+		plane.c \
+		helpers.c
 		
 		
 SRCS = $(addprefix $(SRC_D),$(SRC))
