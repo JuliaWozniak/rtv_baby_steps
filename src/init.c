@@ -91,7 +91,7 @@ t_shape *init_sphere()
 
 	sphere = (t_shape *)ft_memalloc(sizeof(t_shape));
 	sphere->pos = (t_point) {40, 0, -20};
-	sphere->color = (t_color) {160, 0, 0};
+	sphere->color = (t_color) {0, 250, 250};
 	sphere->next = NULL;
 	sphere->size = 25;
 	sphere->type = SPHERE;

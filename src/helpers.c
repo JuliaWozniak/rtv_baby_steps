@@ -15,7 +15,7 @@ void print_vector(t_vector v)
 
 void print_color(t_color clr)
 {
-	printf("%i %i %i \n", clr.r, clr.g, clr.b);
+	printf("%f %f %f \n", clr.r, clr.g, clr.b);
 }
 
 

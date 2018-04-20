@@ -50,7 +50,6 @@ t_vector get_normal(t_intersect *i, t_vector pos)
 	if (i->shape->type == SPHERE)
 		normal = subtract_vec(pos, i->shape->pos);
 	normal = vec_norm(normal);
-	print_vector(normal);
 	return (normal);
 }
 
@@ -78,10 +77,24 @@ int is_in_shadow(t_shape *cur, t_intersect *i, t_shape *light, t_vector pos)
 					intersected_any = inter_cone(pos, i2, cur);
 				if (cur->type == CYLINDER)
 					intersected_any = inter_cylinder(pos, i2, cur);
+				if (i2->dist > 0.0001 && i2->dist < i->dist)
+					return (1);
 			}
 		cur = cur->next;
 	}
-	return (intersected_any);
+	return (0);
+}
+
+
+t_color mix_shadow(t_intersect *i, t_shape *light, float d, float l)
+{
+	t_color color;
+
+	l = ft_float_01(l * 4 * d);
+	color.r += l * (i->shape->color.r / 255) * (light->color.r / 255);
+	color.g += l * (i->shape->color.g / 255) * (light->color.g / 255);
+	color.b += l * (i->shape->color.b / 255) * (light->color.b / 255);
+	return (color);
 }
 
 void get_color(t_glob *g, t_intersect *i, t_shape *light, t_vector ray)
@@ -94,18 +107,22 @@ void get_color(t_glob *g, t_intersect *i, t_shape *light, t_vector ray)
 
 	pos = (t_vector) {g->cam_pos.x + i->dist * ray.x, g->cam_pos.y +
 			i->dist * ray.y, g->cam_pos.z + i->dist * ray.z};
-		if (i->shape == NULL)
-				printf("wow\n");
-	normal = get_normal(i, pos);
-	printf("here\n");
+	normal = get_normal(i, pos); // ok
+
 	while (light != NULL)
 	{
 		l = 0.15;
-		dist = subtract_vec(light->pos, pos);
-		d = ft_float_01(1.0 / sqrtf(sqrtf(vec_dot(dist, dist))));
-		dist = vec_norm(dist);
-		if (is_in_shadow(g->shape_set, i, light, pos))
-			;
+		dist = subtract_vec(light->pos, pos); // okay
+		d = ft_float_01(1.0 / sqrtf(sqrtf(vec_dot(dist, dist)))); // okay
+		dist = vec_norm(dist); // okay
+		if ((is_in_shadow(g->shape_set, i, light, pos)) == 0)
+		{
+			l += ft_float_01(vec_dot(dist, normal));
+			printf("%f\n", l);
+		}
+		//print_color(i->color);
+		i->color = mix_shadow(i, light, d, l);
+		//print_color(i->color);
 		light = light->next;
 	}
 }
@@ -116,8 +133,8 @@ void render_pixel(t_glob *g)
 	// t_ray ray;
 	t_intersect *i;
 	// int intersected;
-	 int int_clr;
-	 t_color pixel_color;
+	 // int int_clr;
+	 // t_color pixel_color;
 	
 	ray_dir = make_ray_from_camera(g, g->c.xu, g->c.yu);
 	i = intersection(ray_dir);
@@ -126,11 +143,12 @@ void render_pixel(t_glob *g)
 
 	if ((does_intersect(g->shape_set, g->cam_pos, i)) > 0)
 	{
-		pixel_color = i->color;
+		
 		get_color(g, i, g->lights, i->ray_dir);
 		//print_color(pixel_color);
-		int_clr = make_int_clr(pixel_color);
-		set_pixel(g->img, g->c.x, g->c.y, int_clr);
+		//pixel_color = i->color;
+		//int_clr = make_int_clr(pixel_color);
+		//set_pixel(g->img, g->c.x, g->c.y, int_clr);
 
 	}
 	free(i);

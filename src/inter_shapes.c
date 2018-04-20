@@ -44,7 +44,7 @@ int inter_sphere(t_point pos, t_intersect *i, t_shape *shape)
 	 	i->shape = shape;
 	 	// printf("%p\n", i->shape);
 	 	// printf("%p\n", shape);
-	 	i->color = shape->color;
+	 	//i->color = shape->color;
 	 	return (1);
 	 }
 	 return (0);

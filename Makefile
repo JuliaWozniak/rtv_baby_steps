@@ -7,7 +7,6 @@ SRC_D = ./src/
 SRC = 	main.c \
 		color.c \
 		vector.c \
-		ray.c \
 		intersection.c \
 		init.c\
 		image.c \

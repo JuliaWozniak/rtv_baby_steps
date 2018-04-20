@@ -3,9 +3,9 @@
 
 typedef struct s_color
 {
-	int r;
-	int g;
-	int b;
+	float r;
+	float g;
+	float b;
 }				t_color;
 
 t_color init_clr(float r, float g, float b);
