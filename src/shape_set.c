@@ -1,19 +1,23 @@
 #include "../rtv.h"
 
-int does_intersect(t_intersect *i, t_shape *shape)
+int does_intersect(t_shape *cur_shape, t_point pos, t_intersect *i)
 {
+	float intersected_any;
 
-	int intersected_any;
-	int inters;
-
-	 intersected_any = 0;
-	while (shape != NULL)
+	intersected_any = 0;
+	while (cur_shape != NULL)
 	{
-
-	 	inters = shape->intersect(i, shape->data, shape);
-		if (inters)
-			intersected_any = 1;
-		shape = shape->next;
+		// if (cur_shape->type == PLANE)
+		// 	intersected_any = inter_plane(pos, i, cur_shape);
+		if (cur_shape->type == SPHERE)
+			intersected_any = inter_sphere(pos, i, cur_shape);
+		// if (i->shape == NULL)
+		// 	printf("interesting\n");
+		// if (cur_shape->type == CONE)
+		// 	intersected_any = inter_cone(pos, i, cur_shape);
+		// if (cur_shape->type == CYLINDER)
+		// 	intersected_any = inter_cylinder(pos, i, cur_shape);
+		cur_shape = cur_shape->next;
 	}
 	return (intersected_any);
 }

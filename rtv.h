@@ -12,33 +12,36 @@
 
 #include <stdio.h> // delete me
 
-#ifndef M_PI
-    #define M_PI 3.14159265358979
-#endif
-# define K_RAY_MIN 0.00001f
-# define K_RAY_MAX 1.0e30f
-# define WIDTH 600
-# define HEIGHT 600
 
-# define PLANE 1 
+# define MAX_DIST 100000
+# define WIDTH 50
+# define HEIGHT 50
+# define FOV 2.0
+
+# define PLANE 1
+# define SPHERE 2
+# define CONE 3
+# define CYLINDER 4
 
 typedef struct s_shape t_shape;
 
 typedef struct s_intersect
 {
-	t_ray ray;
-	float t;
+	float dist;
 	t_shape *shape;
 	t_color color;
-	t_vector normal;
+	t_vector ray_dir;
+	t_vector v_dist;
 }				t_intersect;
 
 typedef struct s_shape
 {
-	void *data;
 	t_shape *next;
 	int type;
-	int (*intersect)(t_intersect *, void *, t_shape *);
+	t_point pos;
+	t_color color;
+	t_vector dir;
+	int size;
 }				t_shape;
 
 typedef struct	s_img
@@ -71,8 +74,10 @@ typedef struct s_glob
 	void *w_p;
 	t_img	*img;
 	t_shape *shape_set;
-	float fov;
+	t_shape *lights;
 	t_coord c;
+	t_vector cam_dir;
+	t_point cam_pos;
 }				t_glob;
 
 
@@ -80,14 +85,18 @@ void	set_pixel(t_img *img, int x, int y, int color);
 void	clear_image(t_glob *g);
 t_img	*create_image(void *mlx);
 t_glob	*init_glob(void);
-int inter_plane(t_intersect *inter, void *data, t_shape *shape);
-int does_intersect(t_intersect *i, t_shape *shape);
+int inter_plane(t_point pos, t_intersect *i, t_shape *shape);
+int does_intersect(t_shape *cur_shape, t_point cam_pos, t_intersect *i);
 void * new_plane(t_point position, t_vector normal, t_color color);
-t_intersect *inter_ray(t_ray ray);
+t_intersect *intersection(t_vector ray);
 t_intersect default_intersection(void);
 int make_int_clr(t_color c);
 void print_vector(t_vector v);
 void print_ray(t_ray r);
 void print_intersection(t_intersect i);
+void print_color(t_color clr);
+int inter_sphere(t_point pos, t_intersect *i, t_shape *shape);
+int inter_cone(t_point pos, t_intersect *i, t_shape *shape);
+int inter_cylinder(t_point pos, t_intersect *i, t_shape *shape);
 
 #endif 

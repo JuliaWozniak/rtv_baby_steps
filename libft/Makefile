@@ -4,6 +4,7 @@ FILES = ft_atoi.c \
 	ft_bzero.c \
 	ft_count_digits.c \
 	ft_count_words.c \
+	ft_clamp.c \
 	ft_isalnum.c \
 	ft_isalpha.c \
 	ft_isascii.c \

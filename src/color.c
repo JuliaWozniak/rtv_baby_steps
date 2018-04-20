@@ -75,15 +75,12 @@ t_color div_clr_f(t_color c, float factor)
 
 int make_int_clr(t_color c)
 {
-	float color;
-	int col;
+	int color;
 
-	color = c.r * 255;
-	color = color * 255;
-	color += c.g * 255;
-	color = color * 255;
-	color += c.b * 255;
-	color += 0.5;
-	col = (int)color;
-	return (col);
+	color = c.r;
+	color = color << 8;
+	color += c.g;
+	color = color << 8;
+	color += c.b;
+	return (color);
 }

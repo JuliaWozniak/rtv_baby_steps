@@ -1,35 +1,5 @@
 #include "../rtv.h"
 
-t_vector init_vec(float x, float y, float z)
-{
-	t_vector new;
-
-	new.x = x;
-	new.y = y;
-	new.z = z;
-	return (new);
-}
-
-t_vector init_vec_f(float f)
-{
-	t_vector new;
-
-	new.x = f;
-	new.y = f;
-	new.z = f;
-	return (new);
-}
-
-t_vector add_vec(t_vector a, t_vector b)
-{
-	t_vector res;
-
-	res.x = a.x + b.x;
-	res.y = a.y + b.y;
-	res.z = a.z + b.z;
-	return (res);
-}
-
 t_vector subtract_vec(t_vector a, t_vector b)
 {
 	t_vector res;
@@ -40,43 +10,13 @@ t_vector subtract_vec(t_vector a, t_vector b)
 	return (res);
 }
 
-t_vector mult_vec(t_vector a, t_vector b)
-{
-	t_vector res;
-
-	res.x = a.x * b.x;
-	res.y = a.y * b.y;
-	res.z = a.z * b.z;
-	return (res);
-}
-
-t_vector mult_vec_f(t_vector c, float factor)
+t_vector scale_vec(t_vector c, float factor)
 {
 	t_vector res;
 
 	res.x = c.x * factor;
 	res.y = c.y * factor;
 	res.z = c.z * factor;
-	return (res);
-}
-
-t_vector div_vec(t_vector a, t_vector b)
-{
-	t_vector res;
-
-	res.x = a.x / b.x;
-	res.y = a.y / b.y;
-	res.z = a.z / b.z;
-	return (res);
-}
-
-t_vector div_vec_f(t_vector c, float factor)
-{
-	t_vector res;
-
-	res.x = c.x / factor;
-	res.y = c.y / factor;
-	res.z = c.z / factor;
 	return (res);
 }
 

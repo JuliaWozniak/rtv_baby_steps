@@ -1,4 +1,4 @@
-NAME = rtv
+NAME = RTv1
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -9,7 +9,6 @@ SRC = 	main.c \
 		vector.c \
 		ray.c \
 		intersection.c \
-		shape.c \
 		init.c\
 		image.c \
 		inter_shapes.c \

@@ -41,6 +41,7 @@ typedef struct		s_gnl
 int					ft_atoi(const char *str);
 void				ft_bzero (void *ptr, size_t num);
 int					ft_count_words(char const *s, char c);
+float	ft_clamp(float value, float min, float max);
 
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
