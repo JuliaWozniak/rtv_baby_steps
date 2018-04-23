@@ -58,7 +58,11 @@ int is_in_shadow(t_shape *cur, t_intersect *i, t_shape *light, t_vector pos)
 	t_intersect *i2;
 	float intersected_any;
 	t_vector dist;
+	t_shape *curs;
 
+curs = light;
+while (curs != NULL)
+{
 	intersected_any = 0;
 	i2 = (t_intersect *)ft_memalloc(sizeof(t_intersect));
 	dist = subtract_vec(light->pos, pos);
@@ -82,6 +86,8 @@ int is_in_shadow(t_shape *cur, t_intersect *i, t_shape *light, t_vector pos)
 			}
 		cur = cur->next;
 	}
+	curs = curs->next;
+}
 	return (0);
 }
 
@@ -90,10 +96,15 @@ t_color mix_shadow(t_intersect *i, t_shape *light, float d, float l)
 {
 	t_color color;
 
-	l = ft_float_01(l * 4 * d);
+	l = ft_float_01(l * 4.0 * d);
+	color = init_clr(0, 0, 0);
 	color.r += l * (i->shape->color.r / 255) * (light->color.r / 255);
 	color.g += l * (i->shape->color.g / 255) * (light->color.g / 255);
 	color.b += l * (i->shape->color.b / 255) * (light->color.b / 255);
+	color.r = ft_float_01(color.r);
+	color.g = ft_float_01(color.g);
+	color.b = ft_float_01(color.b);
+	//print_color(color);
 	return (color);
 }
 
@@ -118,7 +129,7 @@ void get_color(t_glob *g, t_intersect *i, t_shape *light, t_vector ray)
 		if ((is_in_shadow(g->shape_set, i, light, pos)) == 0)
 		{
 			l += ft_float_01(vec_dot(dist, normal));
-			printf("%f\n", l);
+			//printf("%f\n", l);
 		}
 		//print_color(i->color);
 		i->color = mix_shadow(i, light, d, l);
@@ -133,24 +144,28 @@ void render_pixel(t_glob *g)
 	// t_ray ray;
 	t_intersect *i;
 	// int intersected;
-	 // int int_clr;
-	 // t_color pixel_color;
+	 int int_clr;
+	// t_color pixel_color;
 	
+	int_clr = 0;
 	ray_dir = make_ray_from_camera(g, g->c.xu, g->c.yu);
 	i = intersection(ray_dir);
 	// intersected = does_intersect(i, g->shape_set);
 	
 
 	if ((does_intersect(g->shape_set, g->cam_pos, i)) > 0)
-	{
-		
-		get_color(g, i, g->lights, i->ray_dir);
-		//print_color(pixel_color);
-		//pixel_color = i->color;
-		//int_clr = make_int_clr(pixel_color);
-		//set_pixel(g->img, g->c.x, g->c.y, int_clr);
-
-	}
+		{
+			get_color(g, i, g->lights, i->ray_dir);
+			//print_color(i->color);
+		}
+		// if (i->color.r != 0 || i->color.g != 0 || i->color.b != 0)
+		// 	print_color(i->color);
+	
+	//pixel_color = i->color;
+	int_clr = make_int_clr(i->color);
+	// if (int_clr != 0)
+	// 	printf("%i \n", int_clr);
+	set_pixel(g->img, g->c.x, g->c.y, int_clr);
 	free(i);
 }
 

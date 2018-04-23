@@ -10,7 +10,7 @@ int inter_plane(t_point pos, t_intersect *i, t_shape *shape)
 	 {
 	 	i->dist = dist;
 	 	i->shape = shape;
-	 	i->color = shape->color;
+	 	//i->color = shape->color;
 	 	return (1);
 	 }
 		
@@ -70,7 +70,7 @@ int inter_cylinder(t_point pos, t_intersect *i, t_shape *shape)
 	 {
 	 	i->dist = dist;
 	 	i->shape = shape;
-	 	i->color = shape->color;
+	 	//i->color = shape->color;
 	 	return (1);
 	 }
 	 return (0);
@@ -101,7 +101,7 @@ int inter_cone(t_point pos, t_intersect *i, t_shape *shape)
 	 {
 	 	i->dist = dist;
 	 	i->shape = shape;
-	 	i->color = shape->color;
+	 	//i->color = shape->color;
 	 	return (1);
 	 }
 	 return (0);

@@ -14,8 +14,8 @@
 
 
 # define MAX_DIST 100000
-# define WIDTH 50
-# define HEIGHT 50
+# define WIDTH 500
+# define HEIGHT 500
 # define FOV 2.0
 
 # define PLANE 1
