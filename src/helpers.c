@@ -18,12 +18,3 @@ void print_color(t_color clr)
 	printf("%f %f %f \n", clr.r, clr.g, clr.b);
 }
 
-
-// void print_intersection(t_intersect i)
-// {
-// 	print_ray(i.ray);
-// 	//printf("%f\n", i.t);
-// 	// if (i.shape)
-// 	// 	printf("shpe type %i\n", i.shape->type);
-// 	// print_vector(i.normal);
-// }

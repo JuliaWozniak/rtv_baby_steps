@@ -7,16 +7,15 @@
 #include <unistd.h>
 #include "ft_color.h"
 #include "ft_vector.h"
-#include "ray.h"
 
 
 #include <stdio.h> // delete me
 
 
 # define MAX_DIST 100000
-# define WIDTH 500
-# define HEIGHT 500
-# define FOV 2.0
+# define WIDTH 700
+# define HEIGHT 700
+# define FOV 1.0
 
 # define PLANE 1
 # define SPHERE 2
@@ -92,7 +91,6 @@ t_intersect *intersection(t_vector ray);
 t_intersect default_intersection(void);
 int make_int_clr(t_color c);
 void print_vector(t_vector v);
-void print_ray(t_ray r);
 void print_intersection(t_intersect i);
 void print_color(t_color clr);
 int inter_sphere(t_point pos, t_intersect *i, t_shape *shape);

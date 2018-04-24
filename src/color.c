@@ -81,26 +81,9 @@ int make_int_clr(t_color c)
 	int bi;
 
 	color = 0;
-if (c.r != 0 || c.g != 0 || c.b != 0)
-{
-	// printf("first = ");
-	// print_color(c);
 	ri = ((int)(c.r * 255) & 0xff) << 16;
 	gi = ((int)(c.g * 255) & 0xff) << 8;
 	bi = ((int)(c.b * 255) & 0xff);
 	color = ri + gi + bi;
-	//printf("%i\n", color);
-
-	// color = (((int)(c.r * 255) & 0xff) << 16) +
-	// ((int)(c.g * 255) & 0xff << 8) +
-	// ((int)(c.b * 255) & 0xff);
-}
-else
-	return (0);
-	// color = c.r;
-	// color = color << 8;
-	// color += c.g;
-	// color = color << 8;
-	// color += c.b;
 	return (color);
 }

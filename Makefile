@@ -7,12 +7,10 @@ SRC_D = ./src/
 SRC = 	main.c \
 		color.c \
 		vector.c \
-		intersection.c \
 		init.c\
 		image.c \
 		inter_shapes.c \
 		shape_set.c \
-		plane.c \
 		helpers.c
 		
 		
